@@ -8,7 +8,7 @@ $(document).ready(function () {
         let codeToParse = $('#codePlaceholder').val();
         let inputVector = $('#inputVector').val();
 
-        let graph = createGraph(codeToParse,inputVector)
+        let graph = createGraph(codeToParse,inputVector);
         let viz = new Viz({ Module, render });
         viz.renderString('digraph { ' +  graph + ' }')
             .then(function(result){

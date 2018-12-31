@@ -95,15 +95,13 @@ function createParametersToStr(argument , parameters) {
     let parametersSplitMap = parametersSplit.map((param) =>
         param.trim()
     );
-    let argumentMap = argument.map((arg , index) =>
+    return argument.map((arg, index) =>
         'let ' + arg.name + ' ' + '=' + ' ' + parametersSplitMap[index] + ';').join(' ');
-    return argumentMap;
 }
 
 function takeLastVertex(ver){
     let verFilter = ver.filter((specificVer) => specificVer.includes('label="exit"'))[0];
-    let verFilterSplit = verFilter.split(' ')[0];
-    return verFilterSplit;
+    return verFilter.split(' ')[0];
 }
 
 function takeArcsOfVertex(vertex){
@@ -131,13 +129,11 @@ function getStatement(vertexType , vertex){
         x.includes(vertex + ' [')
     );
     let checkVertexSplit = checkVertex[0].split(' [')[1];
-    let checkVertexSplitSpecific = takeASpecificPartInStr(checkVertexSplit,7, checkVertexSplit.length - 2);
-    return checkVertexSplitSpecific;
+    return takeASpecificPartInStr(checkVertexSplit, 7, checkVertexSplit.length - 2);
 }
 
 function checkIfTerm(vertex){
-    let term = conditionExpression.includes(getStatement(graphModel.vertexKind[0] , vertex));
-    return term;
+    return conditionExpression.includes(getStatement(graphModel.vertexKind[0], vertex));
 }
 
 function takeInformationOnVertex(vertex){
@@ -209,7 +205,7 @@ function printBox(vertex , print ){
 }
 
 function writeNumberInBox(vertex , index ){
-    let str = '';
+    let str;
     vertex = vertex.slice(1).join(' [');
     let vertexSlice = takeASpecificPartInStr(vertex,0,7);
     str = vertexSlice + '';
@@ -220,10 +216,8 @@ function writeNumberInBox(vertex , index ){
 
 function insertGlobalVariablesIntoModelString(globalVariables , functionIn){
     globalVariables.map((variable , index) => {
-        if(index < functionIn){
+        if(index < functionIn) {
             localVariables.modelString = localVariables.modelString + escodegen.generate(variable);
-        }else{
-            true;
         }
     });
 }
